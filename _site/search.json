@@ -14,20 +14,6 @@
     "text": "How to use\n\nAccept the assignment and get your own github repo.\nBlog/journal what you are doing in R, by editing the .qmd files.\nSee the links page for lots of helpful links on learning R.\nChange everything to make it your own.\nMake sure to render you website every time before you want to upload changes."
   },
   {
-    "objectID": "content/01_journal/02_statistics.html",
-    "href": "content/01_journal/02_statistics.html",
-    "title": "Statistical Concepts",
-    "section": "",
-    "text": "Note\n\n\n\nYou can delete everything in here and start fresh."
-  },
-  {
-    "objectID": "content/01_journal/04_causality.html",
-    "href": "content/01_journal/04_causality.html",
-    "title": "Causality",
-    "section": "",
-    "text": "Note\n\n\n\nYou can delete everything in here and start fresh."
-  },
-  {
     "objectID": "content/01_journal/09_iv.html",
     "href": "content/01_journal/09_iv.html",
     "title": "Instrumental Variables",
@@ -49,6 +35,41 @@
     "text": "Note\n\n\n\nYou can delete everything in here and start fresh."
   },
   {
+    "objectID": "content/01_journal/03_regression.html",
+    "href": "content/01_journal/03_regression.html",
+    "title": "Regression and Statistical Inference",
+    "section": "",
+    "text": "1 Assignment 1\n\ncar_prices &lt;- readRDS(\"C:/Users/Marcel/Master/DataScience/data/car_prices.rds\")\ndim(car_prices)\n\n#&gt; [1] 181  22\n\n\nThe data has 22 rows and 181 columns.\n\n\n2 Assignment 2\n\nhead(car_prices)\n\n\n\n  \n\n\n\nThe data contains Strings &lt;chr&gt; and numbers &lt;dbl&gt;. Numbers can be compared and ordered by size and used for maths, while strings can mainly be checked for equality. (Or ordered by their characters)\n\n\n3 Assignment 3\n\nlm_all &lt;- lm(price ~ ., data = car_prices)\nsummary(lm_all,digits = 2)\n\n#&gt; \n#&gt; Call:\n#&gt; lm(formula = price ~ ., data = car_prices)\n#&gt; \n#&gt; Residuals:\n#&gt;    Min     1Q Median     3Q    Max \n#&gt;  -5662  -1120      0    798   9040 \n#&gt; \n#&gt; Coefficients:\n#&gt;                        Estimate Std. Error t value Pr(&gt;|t|)    \n#&gt; (Intercept)          -36269.965  15460.866  -2.346 0.020354 *  \n#&gt; aspirationturbo        1846.206   1041.391   1.773 0.078386 .  \n#&gt; doornumbertwo           242.523    571.929   0.424 0.672172    \n#&gt; carbodyhardtop        -3691.743   1424.825  -2.591 0.010561 *  \n#&gt; carbodyhatchback      -3344.335   1238.359  -2.701 0.007757 ** \n#&gt; carbodysedan          -2292.820   1356.014  -1.691 0.093043 .  \n#&gt; carbodywagon          -3427.921   1490.285  -2.300 0.022885 *  \n#&gt; drivewheelfwd          -504.564   1076.623  -0.469 0.640030    \n#&gt; drivewheelrwd           -15.446   1268.070  -0.012 0.990299    \n#&gt; enginelocationrear     6643.492   2572.275   2.583 0.010806 *  \n#&gt; wheelbase               -30.197     92.776  -0.325 0.745294    \n#&gt; carlength               -29.740     51.672  -0.576 0.565824    \n#&gt; carwidth                731.819    244.533   2.993 0.003258 ** \n#&gt; carheight               123.195    134.607   0.915 0.361617    \n#&gt; curbweight                2.612      1.781   1.467 0.144706    \n#&gt; enginetypedohcv       -8541.957   4749.685  -1.798 0.074219 .  \n#&gt; enginetypel             978.748   1786.384   0.548 0.584619    \n#&gt; enginetypeohc          3345.252    933.001   3.585 0.000461 ***\n#&gt; enginetypeohcf          972.919   1625.631   0.598 0.550462    \n#&gt; enginetypeohcv        -6222.322   1236.415  -5.033 1.43e-06 ***\n#&gt; cylindernumberfive   -11724.540   3019.192  -3.883 0.000157 ***\n#&gt; cylindernumberfour   -11549.326   3177.177  -3.635 0.000387 ***\n#&gt; cylindernumbersix     -7151.398   2247.230  -3.182 0.001793 ** \n#&gt; cylindernumberthree   -4318.929   4688.833  -0.921 0.358545    \n#&gt; cylindernumbertwelve -11122.209   4196.494  -2.650 0.008946 ** \n#&gt; enginesize              125.934     26.541   4.745 5.00e-06 ***\n#&gt; fuelsystem2bbl          177.136    883.615   0.200 0.841400    \n#&gt; fuelsystemmfi         -3041.018   2576.996  -1.180 0.239934    \n#&gt; fuelsystemmpfi          359.278   1001.529   0.359 0.720326    \n#&gt; fuelsystemspdi        -2543.890   1363.546  -1.866 0.064140 .  \n#&gt; fuelsystemspfi          514.766   2499.229   0.206 0.837107    \n#&gt; boreratio             -1306.740   1642.221  -0.796 0.427516    \n#&gt; stroke                -4527.137    922.732  -4.906 2.49e-06 ***\n#&gt; compressionratio       -737.901    555.960  -1.327 0.186539    \n#&gt; horsepower               10.293     22.709   0.453 0.651035    \n#&gt; peakrpm                   2.526      0.634   3.983 0.000108 ***\n#&gt; citympg                 -90.352    166.647  -0.542 0.588538    \n#&gt; highwaympg              154.858    167.148   0.926 0.355761    \n#&gt; ---\n#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n#&gt; \n#&gt; Residual standard error: 2189 on 143 degrees of freedom\n#&gt; Multiple R-squared:  0.9415, Adjusted R-squared:  0.9264 \n#&gt; F-statistic: 62.21 on 37 and 143 DF,  p-value: &lt; 2.2e-16\n\n#confint(lm_all, level = 0.95)\n\n\n\n4 Assignment 4\nThe peakrpm is a number that takes on values between 4200 and 6600 in our data.\nIncreasing the peakrpm by one would increase the price of the vehicle by $2.56.\nThis result is statistically significant as it has three stars in the summary table which correspond to a p-value between 0 and 0.001.\n\n\n5 Assignment 5\n\nlibrary(tidyverse)\nnew &lt;- car_prices %&gt;% mutate(seat_heating = TRUE)\nlm_all &lt;- lm(price ~ ., data = new)\nsummary(lm_all,digits = 2)\n\n#&gt; \n#&gt; Call:\n#&gt; lm(formula = price ~ ., data = new)\n#&gt; \n#&gt; Residuals:\n#&gt;    Min     1Q Median     3Q    Max \n#&gt;  -5662  -1120      0    798   9040 \n#&gt; \n#&gt; Coefficients: (1 not defined because of singularities)\n#&gt;                        Estimate Std. Error t value Pr(&gt;|t|)    \n#&gt; (Intercept)          -36269.965  15460.866  -2.346 0.020354 *  \n#&gt; aspirationturbo        1846.206   1041.391   1.773 0.078386 .  \n#&gt; doornumbertwo           242.523    571.929   0.424 0.672172    \n#&gt; carbodyhardtop        -3691.743   1424.825  -2.591 0.010561 *  \n#&gt; carbodyhatchback      -3344.335   1238.359  -2.701 0.007757 ** \n#&gt; carbodysedan          -2292.820   1356.014  -1.691 0.093043 .  \n#&gt; carbodywagon          -3427.921   1490.285  -2.300 0.022885 *  \n#&gt; drivewheelfwd          -504.564   1076.623  -0.469 0.640030    \n#&gt; drivewheelrwd           -15.446   1268.070  -0.012 0.990299    \n#&gt; enginelocationrear     6643.492   2572.275   2.583 0.010806 *  \n#&gt; wheelbase               -30.197     92.776  -0.325 0.745294    \n#&gt; carlength               -29.740     51.672  -0.576 0.565824    \n#&gt; carwidth                731.819    244.533   2.993 0.003258 ** \n#&gt; carheight               123.195    134.607   0.915 0.361617    \n#&gt; curbweight                2.612      1.781   1.467 0.144706    \n#&gt; enginetypedohcv       -8541.957   4749.685  -1.798 0.074219 .  \n#&gt; enginetypel             978.748   1786.384   0.548 0.584619    \n#&gt; enginetypeohc          3345.252    933.001   3.585 0.000461 ***\n#&gt; enginetypeohcf          972.919   1625.631   0.598 0.550462    \n#&gt; enginetypeohcv        -6222.322   1236.415  -5.033 1.43e-06 ***\n#&gt; cylindernumberfive   -11724.540   3019.192  -3.883 0.000157 ***\n#&gt; cylindernumberfour   -11549.326   3177.177  -3.635 0.000387 ***\n#&gt; cylindernumbersix     -7151.398   2247.230  -3.182 0.001793 ** \n#&gt; cylindernumberthree   -4318.929   4688.833  -0.921 0.358545    \n#&gt; cylindernumbertwelve -11122.209   4196.494  -2.650 0.008946 ** \n#&gt; enginesize              125.934     26.541   4.745 5.00e-06 ***\n#&gt; fuelsystem2bbl          177.136    883.615   0.200 0.841400    \n#&gt; fuelsystemmfi         -3041.018   2576.996  -1.180 0.239934    \n#&gt; fuelsystemmpfi          359.278   1001.529   0.359 0.720326    \n#&gt; fuelsystemspdi        -2543.890   1363.546  -1.866 0.064140 .  \n#&gt; fuelsystemspfi          514.766   2499.229   0.206 0.837107    \n#&gt; boreratio             -1306.740   1642.221  -0.796 0.427516    \n#&gt; stroke                -4527.137    922.732  -4.906 2.49e-06 ***\n#&gt; compressionratio       -737.901    555.960  -1.327 0.186539    \n#&gt; horsepower               10.293     22.709   0.453 0.651035    \n#&gt; peakrpm                   2.526      0.634   3.983 0.000108 ***\n#&gt; citympg                 -90.352    166.647  -0.542 0.588538    \n#&gt; highwaympg              154.858    167.148   0.926 0.355761    \n#&gt; seat_heatingTRUE             NA         NA      NA       NA    \n#&gt; ---\n#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n#&gt; \n#&gt; Residual standard error: 2189 on 143 degrees of freedom\n#&gt; Multiple R-squared:  0.9415, Adjusted R-squared:  0.9264 \n#&gt; F-statistic: 62.21 on 37 and 143 DF,  p-value: &lt; 2.2e-16\n\n\nThe values of seat_heating are all NA the reason for this could be that as the value is the same for each entry the regression doe not know what would change if the seat_heating value would change."
+  },
+  {
+    "objectID": "content/01_journal/01_probability.html",
+    "href": "content/01_journal/01_probability.html",
+    "title": "Probability Theory",
+    "section": "",
+    "text": "1 Assignment 1\nThe probability of two consecutive events is obtained by multiplying the probabilities.\n\\(P(T \\cap S) = 0.06\\)\n\\(P(T \\cap \\overline{S})= 0.24\\)\n\\(P(\\overline{T} \\cap S) = 0.42\\)\n\\(P(\\overline{T} \\cap \\overline{S}) = 0.28\\)\n\\(P(T \\cap S) + P(T \\cap \\overline{S}) + P(\\overline{T} \\cap S)+P(\\overline{T} \\cap \\overline{S})=1\\)\n\na&lt;-0.3*0.2\nb&lt;-0.3*0.8\n\nc&lt;-0.7*0.6\nd&lt;-0.7*0.4\n\na\n\n#&gt; [1] 0.06\n\nb\n\n#&gt; [1] 0.24\n\nc\n\n#&gt; [1] 0.42\n\nd\n\n#&gt; [1] 0.28\n\na+b+c+d\n\n#&gt; [1] 1\n\n\n\n\n2 Assignment 2\nPercentage of customers using all three devices: \\(0.5\\%\\)\nPercentage of customers using at least two devices: \\(7.3\\%+3.3\\%+8.8\\%+0.5\\% = 19.9\\%\\)\nPercentage of users using only one device: \\(42\\%+10\\%+27.8\\%=79.8\\%\\)\n\n7.3+3.3+8.8+0.5 \n\n#&gt; [1] 19.9\n\n42+10+27.8\n\n#&gt; [1] 79.8\n\n\n\n\n3 Assignment 3\nThese results show that in case the alarm is triggered, there is a possibility of about 19.8% that the product is flawless and a probability of 80.2% that the product is faulty.\n\nba&lt;-0.97\nbna&lt;-0.01\na&lt;-0.04\n\nnab&lt;-(bna*(1-a))/((bna*(1-a))+(ba*(a)))\nnab\n\n#&gt; [1] 0.1983471\n\nab&lt;-(ba*a)/((ba*a)+(bna*(1-a)))\nab\n\n#&gt; [1] 0.8016529"
+  },
+  {
+    "objectID": "content/01_journal/02_statistics.html",
+    "href": "content/01_journal/02_statistics.html",
+    "title": "Statistical Concepts",
+    "section": "",
+    "text": "1 Assignment 1\n\nrandom_vars &lt;- readRDS(\"C:/Users/Marcel/Master/DataScience/data/random_vars.rds\")\nexpected_age &lt;- mean(random_vars$age)\ncat(\"Age, Expected:\",expected_age)\n\n#&gt; Age, Expected: 33.471\n\nvariance_age &lt;- var(random_vars$age)\ncat(\"Age, Variance:\",variance_age)\n\n#&gt; Age, Variance: 340.6078\n\nstd_dev_age &lt;- sd(random_vars$age)\ncat(\"Age, Standard Deviation:\",std_dev_age)\n\n#&gt; Age, Standard Deviation: 18.45556\n\nexpected_income &lt;- mean(random_vars$income)\ncat(\"Income, Expected:\",expected_income)\n\n#&gt; Income, Expected: 3510.731\n\nvariance_income &lt;- var(random_vars$income)\ncat(\"Income, Variance:\",variance_income)\n\n#&gt; Income, Variance: 8625646\n\nstd_dev_income &lt;- sd(random_vars$income)\ncat(\"Income, Standard Deviation:\",std_dev_income)\n\n#&gt; Income, Standard Deviation: 2936.945\n\n\n\n\n2 Assignment 2\nIt makes sense to compare the standard deviations of both variables. The low std dev for the age indicates that a lot of the given values are close to the expected value but the high standard deviation of the income shows that the difference of income varies far more than the age for the given date.\n\n\n3 Assignment 3\n\ncovariance &lt;- cov(random_vars$age, random_vars$income)\ncat(\"Covariance:\", covariance)\n\n#&gt; Covariance: 29700.15\n\ncorrelation &lt;- cor(random_vars$age, random_vars$income)\ncat(\"Correlation:\", correlation)\n\n#&gt; Correlation: 0.5479432\n\n\n\n\n4 Assignment 4\nI find the correlation easier to understand. A high covariance means that with increasing age the income also increases. I am not sure which values are “high”. As the values of correlation are bound between -1 and 1 its easier to understand which values are high enough to mean something.\n\n\n5 Assignment 5\n\nu18 &lt;- random_vars[random_vars$age &lt;= 18, ]\nexpected_income_u18 &lt;- mean(u18$income)\ncat(\"Income, Expected, u18:\",expected_income_u18)\n\n#&gt; Income, Expected, u18: 389.6074\n\nage18to65 &lt;- random_vars[random_vars$age &lt; 65, ]\nage18to65 &lt;- age18to65[age18to65$age &gt;= 18, ]\nexpected_income_age18to65 &lt;- mean(age18to65$income)\ncat(\"Income, Expected, age18to65:\",expected_income_age18to65)\n\n#&gt; Income, Expected, age18to65: 4685.734\n\no65 &lt;- random_vars[random_vars$age &gt;= 65, ]\nexpected_income_o65 &lt;- mean(o65$income)\ncat(\"Income, Expected, o65:\",expected_income_o65)\n\n#&gt; Income, Expected, o65: 1777.237"
+  },
+  {
+    "objectID": "content/01_journal/04_causality.html",
+    "href": "content/01_journal/04_causality.html",
+    "title": "Causality",
+    "section": "",
+    "text": "Source: https://tylervigen.com/spurious-correlations\n\nlibrary(ggplot2)\ndates&lt;-c(1999:2009)\ncars_s&lt;-c(758000,863000,837000,930000,830000,810000,923000,1154000,1183000,1142000,829000)\nscale&lt;- 8500\ns&lt;-c(87,103,91,112,104,108,113,137,131,129,104)*scale\n\n\n\ncars&lt;-data.frame(year = dates,cars_sold = cars_s,suicides = s)\nggplot(cars,aes(x = year))+\n  geom_line(aes(y = cars_sold))+\n  geom_line(aes(y = suicides), color = \"red\")+\n  scale_y_continuous(\"Japanese cars sold\",sec.axis = sec_axis(~ . / scale,name=\"Suicides using car\"))+\n  theme(axis.title.y.right = element_text(color = \"red\"))+\n  ggtitle(\"Correlation: Suicides using cars and Japanese car sales in the US\")"
+  },
+  {
+    "objectID": "content/01_journal/04_causality.html#correlation-between-japanese-cars-sold-in-the-us-and-suicides-by-crashing-a-motor-vehicle.",
+    "href": "content/01_journal/04_causality.html#correlation-between-japanese-cars-sold-in-the-us-and-suicides-by-crashing-a-motor-vehicle.",
+    "title": "Causality",
+    "section": "",
+    "text": "Source: https://tylervigen.com/spurious-correlations\n\nlibrary(ggplot2)\ndates&lt;-c(1999:2009)\ncars_s&lt;-c(758000,863000,837000,930000,830000,810000,923000,1154000,1183000,1142000,829000)\nscale&lt;- 8500\ns&lt;-c(87,103,91,112,104,108,113,137,131,129,104)*scale\n\n\n\ncars&lt;-data.frame(year = dates,cars_sold = cars_s,suicides = s)\nggplot(cars,aes(x = year))+\n  geom_line(aes(y = cars_sold))+\n  geom_line(aes(y = suicides), color = \"red\")+\n  scale_y_continuous(\"Japanese cars sold\",sec.axis = sec_axis(~ . / scale,name=\"Suicides using car\"))+\n  theme(axis.title.y.right = element_text(color = \"red\"))+\n  ggtitle(\"Correlation: Suicides using cars and Japanese car sales in the US\")"
+  },
+  {
     "objectID": "content/01_journal/06_rct.html",
     "href": "content/01_journal/06_rct.html",
     "title": "Randomized Controlled Trials",
@@ -59,27 +80,6 @@
     "objectID": "content/01_journal/08_did.html",
     "href": "content/01_journal/08_did.html",
     "title": "Difference-in-Differences",
-    "section": "",
-    "text": "Note\n\n\n\nYou can delete everything in here and start fresh."
-  },
-  {
-    "objectID": "content/01_journal/01_probability.html",
-    "href": "content/01_journal/01_probability.html",
-    "title": "Probability Theory",
-    "section": "",
-    "text": "Note\n\n\n\nYou can delete everything in here and start freshh.\nThis is a .qmd file. It is plain text with special features. Any time you write just like this, it will be compiled to normal text in the website. If you put a # in front of your text, it will create a top level-header.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
-  },
-  {
-    "objectID": "content/01_journal/01_probability.html#header-2",
-    "href": "content/01_journal/01_probability.html#header-2",
-    "title": "Probability Theory",
-    "section": "2.1 Header 2",
-    "text": "2.1 Header 2\n\nHeader 3\n\nHeader 4\n\nHeader 5\n\nHeader 6"
-  },
-  {
-    "objectID": "content/01_journal/03_regression.html",
-    "href": "content/01_journal/03_regression.html",
-    "title": "Regression and Statistical Inference",
     "section": "",
     "text": "Note\n\n\n\nYou can delete everything in here and start fresh."
   },

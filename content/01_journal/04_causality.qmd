@@ -2,6 +2,30 @@
 title: "Causality"
 ---
 
-::: callout-note
-You can delete everything in here and start fresh.
-:::
+# Assignment 1
+
+## Correlation between Japanese cars sold in the US and suicides by crashing a motor vehicle.
+
+Source: <https://tylervigen.com/spurious-correlations>
+
+```{r}
+library(ggplot2)
+dates<-c(1999:2009)
+cars_s<-c(758000,863000,837000,930000,830000,810000,923000,1154000,1183000,1142000,829000)
+scale<- 8500
+s<-c(87,103,91,112,104,108,113,137,131,129,104)*scale
+
+
+
+cars<-data.frame(year = dates,cars_sold = cars_s,suicides = s)
+ggplot(cars,aes(x = year))+
+  geom_line(aes(y = cars_sold))+
+  geom_line(aes(y = suicides), color = "red")+
+  scale_y_continuous("Japanese cars sold",sec.axis = sec_axis(~ . / scale,name="Suicides using car"))+
+  theme(axis.title.y.right = element_text(color = "red"))+
+  ggtitle("Correlation: Suicides using cars and Japanese car sales in the US")
+                                                                   
+
+
+
+```

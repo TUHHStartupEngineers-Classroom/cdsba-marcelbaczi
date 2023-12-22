@@ -1,0 +1,18 @@
+{
+  "hash": "f45e2d8bf2cb191f8c1578a65b1a287d",
+  "result": {
+    "markdown": "---\ntitle: \"Causality\"\n---\n\n\n# Assignment 1\n\n## Correlation between Japanese cars sold in the US and suicides by crashing a motor vehicle.\n\nSource: <https://tylervigen.com/spurious-correlations>\n\n\n::: {.cell hash='04_causality_cache/html/unnamed-chunk-1_9ba8bf4bd959ae4cb08202e29511653e'}\n\n```{.r .cell-code}\nlibrary(ggplot2)\ndates<-c(1999:2009)\ncars_s<-c(758000,863000,837000,930000,830000,810000,923000,1154000,1183000,1142000,829000)\nscale<- 8500\ns<-c(87,103,91,112,104,108,113,137,131,129,104)*scale\n\n\n\ncars<-data.frame(year = dates,cars_sold = cars_s,suicides = s)\nggplot(cars,aes(x = year))+\n  geom_line(aes(y = cars_sold))+\n  geom_line(aes(y = suicides), color = \"red\")+\n  scale_y_continuous(\"Japanese cars sold\",sec.axis = sec_axis(~ . / scale,name=\"Suicides using car\"))+\n  theme(axis.title.y.right = element_text(color = \"red\"))+\n  ggtitle(\"Correlation: Suicides using cars and Japanese car sales in the US\")\n```\n\n::: {.cell-output-display}\n![](04_causality_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<link href=\"../../site_libs/pagedtable-1.1/css/pagedtable.css\" rel=\"stylesheet\" />\r\n<script src=\"../../site_libs/pagedtable-1.1/js/pagedtable.js\"></script>\r\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -2,6 +2,48 @@
 title: "Regression and Statistical Inference"
 ---
 
-::: callout-note
-You can delete everything in here and start fresh.
-:::
+# Assignment 1
+
+```{r}
+car_prices <- readRDS("C:/Users/Marcel/Master/DataScience/data/car_prices.rds")
+dim(car_prices)
+```
+
+The data has 22 rows and 181 columns.
+
+# Assignment 2
+
+```{r}
+head(car_prices)
+```
+
+The data contains Strings \<chr\> and numbers \<dbl\>. Numbers can be compared and ordered by size and used for maths, while strings can mainly be checked for equality. (Or ordered by their characters)
+
+# Assignment 3
+
+```{r}
+lm_all <- lm(price ~ ., data = car_prices)
+summary(lm_all,digits = 2)
+#confint(lm_all, level = 0.95)
+
+```
+
+# Assignment 4
+
+The peakrpm is a number that takes on values between 4200 and 6600 in our data.
+
+Increasing the peakrpm by one would increase the price of the vehicle by \$2.56.
+
+This result is statistically significant as it has three stars in the summary table which correspond to a p-value between 0 and 0.001.
+
+# Assignment 5
+
+```{r}
+library(tidyverse)
+new <- car_prices %>% mutate(seat_heating = TRUE)
+lm_all <- lm(price ~ ., data = new)
+summary(lm_all,digits = 2)
+
+```
+
+The values of seat_heating are all NA the reason for this could be that as the value is the same for each entry the regression doe not know what would change if the seat_heating value would change.

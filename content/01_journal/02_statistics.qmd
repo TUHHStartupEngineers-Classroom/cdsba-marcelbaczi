@@ -1,7 +1,52 @@
 ---
 title: "Statistical Concepts"
 ---
+# Assignment 1
+```{r}
+random_vars <- readRDS("C:/Users/Marcel/Master/DataScience/data/random_vars.rds")
+expected_age <- mean(random_vars$age)
+cat("Age, Expected:",expected_age)
+variance_age <- var(random_vars$age)
+cat("Age, Variance:",variance_age)
+std_dev_age <- sd(random_vars$age)
+cat("Age, Standard Deviation:",std_dev_age)
 
-::: callout-note
-You can delete everything in here and start fresh.
-:::
+expected_income <- mean(random_vars$income)
+cat("Income, Expected:",expected_income)
+variance_income <- var(random_vars$income)
+cat("Income, Variance:",variance_income)
+std_dev_income <- sd(random_vars$income)
+cat("Income, Standard Deviation:",std_dev_income)
+```
+
+# Assignment 2
+It makes sense to compare the standard deviations of both variables. The low std dev for the age indicates that a lot of the given values are close to the expected value but the high standard deviation of the income shows that the difference of income varies far more than the age for the given date.
+
+# Assignment 3
+```{r}
+covariance <- cov(random_vars$age, random_vars$income)
+cat("Covariance:", covariance)
+
+correlation <- cor(random_vars$age, random_vars$income)
+cat("Correlation:", correlation)
+```
+
+
+# Assignment 4
+I find the correlation easier to understand. A high covariance means that with increasing age the income also increases. I am not sure which values are "high". As the values of correlation are bound between -1 and 1 its easier to understand which values are high enough to mean something.
+
+# Assignment 5
+```{r}
+u18 <- random_vars[random_vars$age <= 18, ]
+expected_income_u18 <- mean(u18$income)
+cat("Income, Expected, u18:",expected_income_u18)
+
+age18to65 <- random_vars[random_vars$age < 65, ]
+age18to65 <- age18to65[age18to65$age >= 18, ]
+expected_income_age18to65 <- mean(age18to65$income)
+cat("Income, Expected, age18to65:",expected_income_age18to65)
+
+o65 <- random_vars[random_vars$age >= 65, ]
+expected_income_o65 <- mean(o65$income)
+cat("Income, Expected, o65:",expected_income_o65)
+```
