@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Oliver Mork">
+<meta name="author" content="Marcel Baczkowski">
 
 <title>MyLabJournal - Statistical Concepts</title>
 <style>
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -63,6 +97,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+
+<link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 
 </head>
@@ -148,7 +185,17 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#assignment-1" id="toc-assignment-1" class="nav-link active" data-scroll-target="#assignment-1"><span class="header-section-number">1</span> Assignment 1</a></li>
+  <li><a href="#assignment-2" id="toc-assignment-2" class="nav-link" data-scroll-target="#assignment-2"><span class="header-section-number">2</span> Assignment 2</a></li>
+  <li><a href="#assignment-3" id="toc-assignment-3" class="nav-link" data-scroll-target="#assignment-3"><span class="header-section-number">3</span> Assignment 3</a></li>
+  <li><a href="#assignment-4" id="toc-assignment-4" class="nav-link" data-scroll-target="#assignment-4"><span class="header-section-number">4</span> Assignment 4</a></li>
+  <li><a href="#assignment-5" id="toc-assignment-5" class="nav-link" data-scroll-target="#assignment-5"><span class="header-section-number">5</span> Assignment 5</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -165,7 +212,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Oliver Mork </p>
+             <p>Marcel Baczkowski </p>
           </div>
   </div>
     
@@ -176,21 +223,91 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<section id="assignment-1" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Assignment 1</h1>
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-1_011420eef388bed17e42071eed8196e2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>random_vars <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"C:/Users/Marcel/Master/DataScience/data/random_vars.rds"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>expected_age <span class="ot">&lt;-</span> <span class="fu">mean</span>(random_vars<span class="sc">$</span>age)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">cat</span>(<span class="st">"Age, Expected:"</span>,expected_age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Age, Expected: 33.471</code></pre>
 </div>
-<div class="callout-title-container flex-fill">
-Note
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>variance_age <span class="ot">&lt;-</span> <span class="fu">var</span>(random_vars<span class="sc">$</span>age)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">cat</span>(<span class="st">"Age, Variance:"</span>,variance_age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Age, Variance: 340.6078</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>std_dev_age <span class="ot">&lt;-</span> <span class="fu">sd</span>(random_vars<span class="sc">$</span>age)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">cat</span>(<span class="st">"Age, Standard Deviation:"</span>,std_dev_age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Age, Standard Deviation: 18.45556</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>expected_income <span class="ot">&lt;-</span> <span class="fu">mean</span>(random_vars<span class="sc">$</span>income)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">cat</span>(<span class="st">"Income, Expected:"</span>,expected_income)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Income, Expected: 3510.731</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>variance_income <span class="ot">&lt;-</span> <span class="fu">var</span>(random_vars<span class="sc">$</span>income)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">cat</span>(<span class="st">"Income, Variance:"</span>,variance_income)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Income, Variance: 8625646</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>std_dev_income <span class="ot">&lt;-</span> <span class="fu">sd</span>(random_vars<span class="sc">$</span>income)</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">cat</span>(<span class="st">"Income, Standard Deviation:"</span>,std_dev_income)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Income, Standard Deviation: 2936.945</code></pre>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>You can delete everything in here and start fresh.</p>
+</section>
+<section id="assignment-2" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Assignment 2</h1>
+<p>It makes sense to compare the standard deviations of both variables. The low std dev for the age indicates that a lot of the given values are close to the expected value but the high standard deviation of the income shows that the difference of income varies far more than the age for the given date.</p>
+</section>
+<section id="assignment-3" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Assignment 3</h1>
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-2_b16cd6b9f4c90a9441f78ac2dc6ab39e">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>covariance <span class="ot">&lt;-</span> <span class="fu">cov</span>(random_vars<span class="sc">$</span>age, random_vars<span class="sc">$</span>income)</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">cat</span>(<span class="st">"Covariance:"</span>, covariance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Covariance: 29700.15</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>correlation <span class="ot">&lt;-</span> <span class="fu">cor</span>(random_vars<span class="sc">$</span>age, random_vars<span class="sc">$</span>income)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">cat</span>(<span class="st">"Correlation:"</span>, correlation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Correlation: 0.5479432</code></pre>
+</div>
+</div>
+</section>
+<section id="assignment-4" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Assignment 4</h1>
+<p>I find the correlation easier to understand. A high covariance means that with increasing age the income also increases. I am not sure which values are “high”. As the values of correlation are bound between -1 and 1 its easier to understand which values are high enough to mean something.</p>
+</section>
+<section id="assignment-5" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Assignment 5</h1>
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-3_02afe96281bf344b3bdc934366c42f42">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>u18 <span class="ot">&lt;-</span> random_vars[random_vars<span class="sc">$</span>age <span class="sc">&lt;=</span> <span class="dv">18</span>, ]</span>
+<span id="cb17-2"><a href="#cb17-2"></a>expected_income_u18 <span class="ot">&lt;-</span> <span class="fu">mean</span>(u18<span class="sc">$</span>income)</span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="fu">cat</span>(<span class="st">"Income, Expected, u18:"</span>,expected_income_u18)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Income, Expected, u18: 389.6074</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>age18to65 <span class="ot">&lt;-</span> random_vars[random_vars<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="dv">65</span>, ]</span>
+<span id="cb19-2"><a href="#cb19-2"></a>age18to65 <span class="ot">&lt;-</span> age18to65[age18to65<span class="sc">$</span>age <span class="sc">&gt;=</span> <span class="dv">18</span>, ]</span>
+<span id="cb19-3"><a href="#cb19-3"></a>expected_income_age18to65 <span class="ot">&lt;-</span> <span class="fu">mean</span>(age18to65<span class="sc">$</span>income)</span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="fu">cat</span>(<span class="st">"Income, Expected, age18to65:"</span>,expected_income_age18to65)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Income, Expected, age18to65: 4685.734</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>o65 <span class="ot">&lt;-</span> random_vars[random_vars<span class="sc">$</span>age <span class="sc">&gt;=</span> <span class="dv">65</span>, ]</span>
+<span id="cb21-2"><a href="#cb21-2"></a>expected_income_o65 <span class="ot">&lt;-</span> <span class="fu">mean</span>(o65<span class="sc">$</span>income)</span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="fu">cat</span>(<span class="st">"Income, Expected, o65:"</span>,expected_income_o65)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Income, Expected, o65: 1777.237</code></pre>
 </div>
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
