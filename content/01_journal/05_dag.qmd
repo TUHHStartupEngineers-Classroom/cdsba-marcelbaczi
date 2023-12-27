@@ -2,6 +2,69 @@
 title: "Directed Acyclic Graphs"
 ---
 
-::: callout-note
-You can delete everything in here and start fresh.
-:::
+# Assignment 1
+
+```{r}
+library(tidyverse)
+library(dagitty)
+#library(ggthemr) package ‘ggthemr’ is not available for this version of R
+library(ggdag)
+
+dag_model <- 'dag {
+bb="-3,-3,3,3"
+Sales [outcome,pos="2.000,0.000"]
+Store1 [pos="-2.000,2.000"]
+Store2 [pos="-2.000,1.000"]
+Store3 [pos="-2.000,-1.000"]
+Store4 [pos="-2.000,-2.000"]
+parkingspots [exposure,pos="0.000,0.000"]
+Store1 -> parkingspots
+Store2 -> parkingspots
+Store3 -> parkingspots
+Store4 -> parkingspots
+parkingspots -> Sales
+}
+'
+# draw DAG
+ggdag(dag_model);
+
+```
+
+# Assignment 2
+
+```{r}
+data <- readRDS("C:/Users/Marcel/Master/DataScience/data/customer_sat.rds")
+print(data)
+
+reg1 <- lm(satisfaction ~ follow_ups, data = data)
+summary(reg1,digits = 2)
+
+reg2 <- lm(satisfaction ~ ., data = data)
+summary(reg2,digits = 2)
+```
+
+# Assignment 3
+
+The difference between the coefficients shows that the satisfaction due to follow ups is influenced by the subscription level of the clients.
+
+Not accounting for the subscription level would indicate that the follow up calls decrease satisfaction level. Accounting for the subscription level shows that this is not the case. This could indicate that customers that pay for higher subscription levels expect follow up calls for the price they pay while some lower paying customers might find it more annoying.
+
+Another important point is that we do not have a lot of data. The range of follow up calls is different for each type of subscription. While the Premium subscribers are on average the most satisfied according to this data they are also the ones called the least. The results might change if they get called as much as the other groups.
+
+# Assignment 4
+
+```{r}
+
+#Satisfaction not conditioned on subscription level
+sat_not_cond <- ggplot(data,aes(x = satisfaction, y = follow_ups))+
+  geom_point()+
+  stat_smooth(method = "lm", se = F)
+
+#Satisfaction conditioned on subscription level
+sat_cond <- ggplot(data,aes(x = satisfaction, y = follow_ups, group=subscription, color=subscription))+
+  geom_point()+
+  stat_smooth(method = "lm", se = F)
+
+sat_not_cond
+sat_cond
+```

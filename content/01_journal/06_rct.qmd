@@ -2,6 +2,72 @@
 title: "Randomized Controlled Trials"
 ---
 
-::: callout-note
-You can delete everything in here and start fresh.
-:::
+# Assignment 1
+
+```{r}
+library(ggplot2)
+data <- readRDS("C:/Users/Marcel/Master/DataScience/data/abtest_online.rds")
+head(data)
+#View(data)
+
+ggplot(data, aes(x = chatbot, y = previous_visit)) +
+  stat_summary() +
+  labs(title = "Balance",
+       x = "Treatment Group",
+       y = "Previous Visits")
+
+data$mobile_device <- as.numeric(data$mobile_device)
+#https://stackoverflow.com/questions/30943167/replace-logical-values-true-false-with-numeric-1-0
+ggplot(data, aes(x = chatbot, y = mobile_device)) +
+  stat_summary() +
+  labs(title = "Balance",
+       x = "Treatment Group",
+       y = "Mobile Device")
+
+ggplot(data, aes(x = chatbot, y = purchase)) +
+  stat_summary() +
+  labs(title = "Balance",
+       x = "Treatment Group",
+       y = "Purchase")
+
+ggplot(data, aes(x = chatbot, y = purchase_amount)) +
+  stat_summary() +
+  labs(title = "Balance",
+       x = "Treatment Group",
+       y = "Purchase Amount")
+```
+
+The covariates are significantly unbalanced between both groups. While the mobile-device usage is quite similliar all other covariates are different.
+
+# Assignment 2
+
+```{r}
+#Assuming it makes no difference if using True/False or 1/0
+
+lm_sales <- lm(purchase~chatbot, data=data)
+summary(lm_sales)
+
+lm_spent <- lm(purchase_amount~chatbot, data=data)
+summary(lm_spent)
+
+```
+
+The chatbot decreases the number of sales and the amount spent during each transaction. As the groups are not really comparable due to their unbalanced covariates this result could be wrong.
+
+# Assignment 3
+
+```{r}
+lm_cate <- lm(purchase_amount ~ chatbot * mobile_device, data = data)
+summary(lm_cate)
+```
+
+While the chatbot itself decreases the purchase_amount by a big number, it only decreases the purchase amount by a small number if used on a mobile device. But the p value is too big.
+
+# Assignment 4
+
+```{r}
+logistic_model <- glm(purchase ~ chatbot, data = data, family = binomial(link = 'logit'))
+summary(logistic_model)
+```
+
+Having the chatbot decreases the log odds by 0.989 compared to the users not using the chatbot.
