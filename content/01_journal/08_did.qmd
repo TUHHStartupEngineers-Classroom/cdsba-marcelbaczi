@@ -2,6 +2,44 @@
 title: "Difference-in-Differences"
 ---
 
-::: callout-note
-You can delete everything in here and start fresh.
-:::
+# Assignment 1
+
+```{r}
+library(tidyverse)
+data<-readRDS("C:/Users/Marcel/Master/DataScience/data/hospdd.rds")
+head(data)
+
+treatment_start<-data %>% filter(procedure == 1, hospital>=0, hospital<=18) %>% pull(month) %>% min()
+treatment_start
+
+
+treated_before<-data %>% filter(procedure == 0, hospital>=0, hospital<=18) %>% pull(satis) %>% mean()
+treated_before
+
+treated_after<-data %>% filter(procedure == 1, hospital>=0, hospital<=18) %>% pull(satis) %>% mean()
+treated_after
+
+control_before<-data %>% filter(month < 4, hospital>18) %>% pull(satis) %>% mean()
+control_before
+
+control_after<-data %>% filter(month >= 4, hospital>18) %>% pull(satis) %>% mean()
+control_after
+```
+
+# Assignment 2
+
+## 1
+
+```{r}
+linear<-lm(satis ~ month + hospital, data = data)
+summary(linear)
+```
+
+## 2
+
+```{r}
+linear_factor <- lm(satis ~ as.factor(month) + as.factor(hospital), data = data)
+summary(linear_factor)
+```
+
+Using the as.factor method shows one coefficient for each month and one for each hospital instead of grouping all together.

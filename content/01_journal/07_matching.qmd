@@ -2,6 +2,64 @@
 title: "Matching and Subclassification"
 ---
 
-::: callout-note
-You can delete everything in here and start fresh.
-:::
+# Assignment 1
+
+```{r}
+library(ggdag)
+library(ggplot2)
+
+data<-readRDS("C:/Users/Marcel/Master/DataScience/data/membership.rds")
+head(data)
+
+
+
+dag<-dagify(avg_purch ~ card,
+              card ~ age + sex + pre_avg_purch,
+              pre_avg_purch ~ sex + age,
+              exposure = "card",
+              outcome = "avg_purch")
+
+
+ggdag(dag)
+
+```
+
+# Assignment 2
+
+```{r}
+model_naive<-lm(avg_purch ~ card, data = data)
+summary(model_naive)
+```
+
+# Assignment 3
+
+## 1
+
+```{r}
+library(MatchIt)
+cem = matchit(card ~ age + sex + pre_avg_purch, data=data, method='cem', estimant='ATE')
+df_cem<-match.data(cem)
+lm_cem<-lm(avg_purch ~ card, data=df_cem, weights=weights)
+summary(lm_cem)
+```
+
+## 2
+
+```{r}
+nn<-matchit(card ~ age + pre_avg_purch , data=data, method="nearest", distance = "mahalanobis", replace = T )
+df_nn<-match.data(nn)
+model_nn<-lm(avg_purch ~ card, data=df_nn ,weights=weights)
+summary(model_nn)
+
+```
+
+## 3
+
+```{r}
+library(tidyverse)
+model_prop<-glm(card ~ age + sex + pre_avg_purch, data=data, family = binomial(link = "logit"))
+df_aug<-data %>% mutate(propensity = predict(model_prop, type = "response"))
+df_ipw<-df_aug %>% mutate(ipw = (card/propensity) + ((1-card) / (1-propensity)))
+model_ipw<-lm(avg_purch~card,data=df_ipw,weights=ipw)
+summary(model_ipw)
+```
