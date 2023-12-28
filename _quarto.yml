@@ -6,7 +6,7 @@ execute:
   cache: true
 
 website:
-  title: "MyLabJournal"
+  title: "Causal Data Science"
   favicon: assets/icons/favicon.svg
   navbar:
     left:
