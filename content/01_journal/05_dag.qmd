@@ -60,11 +60,13 @@ sat_not_cond <- ggplot(data,aes(x = satisfaction, y = follow_ups))+
   geom_point()+
   stat_smooth(method = "lm", se = F)
 
+sat_not_cond
+
+
 #Satisfaction conditioned on subscription level
 sat_cond <- ggplot(data,aes(x = satisfaction, y = follow_ups, group=subscription, color=subscription))+
   geom_point()+
   stat_smooth(method = "lm", se = F)
 
-sat_not_cond
 sat_cond
 ```

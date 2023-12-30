@@ -2,6 +2,44 @@
 title: "Instrumental Variables"
 ---
 
-::: callout-note
-You can delete everything in here and start fresh.
-:::
+# Assignment 1
+
+```{r}
+library(ggdag)
+
+dag<-dagify(used_ftr ~ time_spent + rand_enc, time_spent ~ used_ftr, exposure = "used_ftr", outcome = "time_spent")
+
+ggdag(dag)
+```
+
+# Assignment 2
+
+```{r}
+data<-readRDS("C:/Users/Marcel/Master/DataScience/data/rand_enc.rds")
+
+model_naive <- lm(time_spent ~ used_ftr, data = data)
+summary(model_naive)
+```
+
+# Assignment 3
+
+```{r}
+cor(data) %>% round(2)
+
+```
+
+# Assignment 4
+
+```{r}
+#first_stage <- lm(used_ftr ~ rand_enc, data = data)
+#summary(first_stage)
+
+#second_stage <- lm(data$time_spent ~ first_stage$fitted.values)
+#summary(second_stage)
+
+library(estimatr)
+model_iv <- iv_robust(time_spent ~ used_ftr | rand_enc, data = data)
+summary(model_iv)
+```
+
+The naive estimate has a value of 10.822 while the IV estimate is 9.738. As the naive estimate is higher than the IV estimate i would consider it slightly upward biased.

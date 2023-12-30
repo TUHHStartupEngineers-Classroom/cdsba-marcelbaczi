@@ -1,0 +1,18 @@
+{
+  "hash": "a639e26a2e02c16169ddaba102b3c874",
+  "result": {
+    "markdown": "---\ntitle: \"Instrumental Variables\"\n---\n\n\n# Assignment 1\n\n\n::: {.cell hash='09_iv_cache/html/unnamed-chunk-1_387ec238ee23f9246ca1057a18bbae54'}\n\n```{.r .cell-code}\nlibrary(ggdag)\n```\n\n::: {.cell-output .cell-output-stderr}\n```\n#> \n#> Attaching package: 'ggdag'\n```\n:::\n\n::: {.cell-output .cell-output-stderr}\n```\n#> The following object is masked from 'package:stats':\n#> \n#>     filter\n```\n:::\n\n```{.r .cell-code}\ndag<-dagify(used_ftr ~ time_spent + rand_enc, time_spent ~ used_ftr, exposure = \"used_ftr\", outcome = \"time_spent\")\n\nggdag(dag)\n```\n\n::: {.cell-output-display}\n![](09_iv_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n:::\n\n\n# Assignment 2\n\n\n::: {.cell hash='09_iv_cache/html/unnamed-chunk-2_1436fd4131dd496697b32b4e5139fad2'}\n\n```{.r .cell-code}\ndata<-readRDS(\"C:/Users/Marcel/Master/DataScience/data/rand_enc.rds\")\n\nmodel_naive <- lm(time_spent ~ used_ftr, data = data)\nsummary(model_naive)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n#> \n#> Call:\n#> lm(formula = time_spent ~ used_ftr, data = data)\n#> \n#> Residuals:\n#>      Min       1Q   Median       3Q      Max \n#> -20.4950  -3.5393   0.0158   3.5961  20.5051 \n#> \n#> Coefficients:\n#>             Estimate Std. Error t value Pr(>|t|)    \n#> (Intercept) 18.86993    0.06955   271.3   <2e-16 ***\n#> used_ftr    10.82269    0.10888    99.4   <2e-16 ***\n#> ---\n#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n#> \n#> Residual standard error: 5.351 on 9998 degrees of freedom\n#> Multiple R-squared:  0.497,\tAdjusted R-squared:  0.497 \n#> F-statistic:  9881 on 1 and 9998 DF,  p-value: < 2.2e-16\n```\n:::\n:::\n\n\n# Assignment 3\n\n\n::: {.cell hash='09_iv_cache/html/unnamed-chunk-3_59a8f8c3c6f1640f12f45369c8369739'}\n\n```{.r .cell-code}\ncor(data) %>% round(2)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n#>            rand_enc used_ftr time_spent\n#> rand_enc       1.00     0.20       0.13\n#> used_ftr       0.20     1.00       0.71\n#> time_spent     0.13     0.71       1.00\n```\n:::\n:::\n\n\n# Assignment 4\n\n\n::: {.cell hash='09_iv_cache/html/unnamed-chunk-4_02fcd3ce18e3cc62d3f8780714bfc454'}\n\n```{.r .cell-code}\n#first_stage <- lm(used_ftr ~ rand_enc, data = data)\n#summary(first_stage)\n\n#second_stage <- lm(data$time_spent ~ first_stage$fitted.values)\n#summary(second_stage)\n\nlibrary(estimatr)\nmodel_iv <- iv_robust(time_spent ~ used_ftr | rand_enc, data = data)\nsummary(model_iv)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n#> \n#> Call:\n#> iv_robust(formula = time_spent ~ used_ftr | rand_enc, data = data)\n#> \n#> Standard error type:  HC2 \n#> \n#> Coefficients:\n#>             Estimate Std. Error t value  Pr(>|t|) CI Lower CI Upper   DF\n#> (Intercept)   19.312     0.2248   85.89 0.000e+00   18.872    19.75 9998\n#> used_ftr       9.738     0.5353   18.19 8.716e-73    8.689    10.79 9998\n#> \n#> Multiple R-squared:  0.4921 ,\tAdjusted R-squared:  0.492 \n#> F-statistic:   331 on 1 and 9998 DF,  p-value: < 2.2e-16\n```\n:::\n:::\n\n\nThe naive estimate has a value of 10.822 while the IV estimate is 9.738. As the naive estimate is higher than the IV estimate i would consider it slightly upward biased.\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<link href=\"../../site_libs/pagedtable-1.1/css/pagedtable.css\" rel=\"stylesheet\" />\r\n<script src=\"../../site_libs/pagedtable-1.1/js/pagedtable.js\"></script>\r\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

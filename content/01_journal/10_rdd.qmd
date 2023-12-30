@@ -2,6 +2,57 @@
 title: "Regression Discontinuity"
 ---
 
-::: callout-note
-You can delete everything in here and start fresh.
-:::
+# Assignment 1
+
+## Half Bandwidth
+
+```{r}
+library(dplyr)
+
+data<-readRDS("C:/Users/Marcel/Master/DataScience/data/coupon.rds")
+
+c0 <- 60
+
+bw <- c0 + c(-5, 5)
+hbw <- c0+(c(-5,5)/2)
+
+df_hbw_below <- data %>% filter(days_since_last >= hbw[1] & days_since_last < c0)
+df_hbw_above <- data %>% filter(days_since_last >= c0 & days_since_last <= hbw[2])
+
+df_hbw <- bind_rows(df_hbw_above, df_hbw_below)
+
+lm_hbw <- lm(purchase_after ~ days_since_last_centered + coupon, df_hbw)
+summary(lm_hbw)
+
+```
+
+# Assignment 2
+
+## Double Bandwidth
+
+```{r}
+
+dbw <- c0+(c(-5,5)*2)
+
+df_dbw_below <- data %>% filter(days_since_last >= dbw[1] & days_since_last < c0)
+df_dbw_above <- data %>% filter(days_since_last >= c0 & days_since_last <= dbw[2])
+
+df_dbw <- bind_rows(df_dbw_above, df_dbw_below)
+
+lm_dbw <- lm(purchase_after ~ days_since_last_centered + coupon, df_dbw)
+summary(lm_dbw)
+```
+
+# Assignment 3
+
+```{r}
+library(rddensity)
+
+data<-readRDS("C:/Users/Marcel/Master/DataScience/data/shipping.rds")
+c0 <- 30
+rddd <- rddensity(data$purchase_amount, c = c0)
+#summary(rddd)
+rdd_plot <- rdplotdensity(rddd, data$purchase_amount, plotN = 100)
+```
+
+The plot shows a big jump at the cutoff value of 30. The confidence intervals do not overlap as such purchase_amount is not a suitable variable.

@@ -6,7 +6,6 @@ title: "Matching and Subclassification"
 
 ```{r}
 library(ggdag)
-library(ggplot2)
 
 data<-readRDS("C:/Users/Marcel/Master/DataScience/data/membership.rds")
 head(data)
